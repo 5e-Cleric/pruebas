@@ -1,0 +1,497 @@
+body:not(.darkmode) {
+    --bodybg: #dbdbdb;
+    --navbg: white;
+    --topnavbg: var(--navbg);
+    --sidebarbg: var(--navbg);
+    --contentbg: rgb(241, 241, 241);
+    --navbuttonbg: var(--navbg);
+    --navborder: black;
+    --iconcolor: black;
+    --specialbutton: rgb(129, 129, 129);
+    --buttonhover: rgb(177, 177, 177);
+    --textcolor: black;
+    --navtext: var(--textcolor);
+    --contenttext: var(--textcolor);
+}
+
+body.darkmode {
+    --bodybg: rgb(22, 22, 22);
+    --navbg: rgb(83, 83, 83);
+    --topnavbg: var(--navbg);
+    --sidebarbg: var(--navbg);
+    --contentbg: #333333;
+    --navbuttonbg: var(--navbg);
+    --navborder: rgb(138, 138, 138);
+    --iconcolor: rgb(206, 206, 206);
+    --specialbutton: rgb(68, 68, 68);
+    --buttonhover: rgb(124, 124, 124);
+    --textcolor: rgb(212, 212, 212);
+    --navtext: var(--textcolor);
+    --contenttext: var(--textcolor);
+}
+
+
+
+body {
+    background: var(--bodybg);
+    margin: unset;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 5;
+    color: var(--textcolor);
+}
+
+body.navopen {
+    overflow-y: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 15px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #00000000;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: rgb(148, 148, 148);
+}
+
+.bar {
+    background-color: var(--navbg);
+    border-color: var(--navborder);
+}
+
+#topbar {
+    position: fixed;
+    width: 100vw;
+    background-color: var(--topnavbg);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-size: 100%;
+    background-repeat: repeat;
+    background-position: top left;
+    height: 90px;
+    border-bottom: 2px solid var(--navborder);
+    box-shadow: 1px 3px 25px var(--navborder);
+    z-index: 3;
+}
+
+.topbar-element {
+    border-left: 1px solid var(--navborder);
+    width: 10vw;
+    height: 100%;
+    background: var(--navbg);
+    user-select: none;
+}
+
+.topbar-element:hover {
+    background: var(--buttonhover);
+}
+
+.topbar-element>a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: unset;
+}
+
+.topbar-element>.logo {
+    background: contain;
+}
+
+
+.dropdown {
+    position: absolute;
+    top: 90px;
+    right: calc(10vw + 1px);
+    width: 10vw;
+    display: none;
+    flex-direction: column;
+    align-content: flex-start;
+    background: var(--specialbutton);
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    overflow: hidden;
+}
+
+.dropdown>a {
+    padding-left: 10px;
+    border-bottom: 1px solid var(--navborder);
+    transition: 0.05s;
+}
+
+.dropdown>a:hover {
+    background: palevioletred;
+}
+
+.dropdown>a:last-child {
+    border: unset;
+}
+
+#language.active+.dropdown {
+    display: flex;
+}
+
+
+
+/*sidebar*/
+
+#sidebar {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 15vw;
+    height: 100vh;
+    background: var(--sidebarbg);
+    border-right: 5px solid var(--navborder);
+    z-index: 5;
+    transition-property: left;
+    transition-duration: 0.3s;
+    box-shadow: 0 0 10px;
+}
+
+#sidebar>#sidebarholder {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+#sidebar::-webkit-scrollbar {
+    width: 7px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+    background: #00000000;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+#sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgb(148, 148, 148);
+}
+
+
+
+.closed {
+    left: calc(-15vw - 5px) !important;
+    box-shadow: none !important;
+}
+
+#sidebartoggle {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: calc(50% - calc((5vw + 5vh) / 2));
+    right: calc((5vw + 5vh) /-2);
+    /*with of the button*/
+    width: calc((5vw + 5vh) /2);
+    aspect-ratio: 1;
+    background: var(--specialbutton);
+    border: none;
+    padding: 0;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    transition-property: width, height;
+    z-index: 3;
+}
+
+#sidebartoggle:hover {
+    background: var(--buttonhover);
+}
+
+#sidebartoggleimgholder {
+    width: calc((1.8vw + 1.8vh) /2);
+    aspect-ratio: 1;
+    border: none;
+    padding: none;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    transform: none;
+    transition-property: (transform);
+    transition-duration: 0.3s;
+    z-index: 3;
+}
+
+#sidebartoggleimgholder.open {
+    transform: rotate(180deg);
+}
+
+#sidebartoggleimgholder:after {
+    display: block;
+    content: '';
+    width: calc((1.8vw + 1.8vh) /2);
+    aspect-ratio: 1;
+    position: static;
+    top: 0px;
+    left: 0px;
+    background: var(--iconcolor);
+    clip-path: polygon(0% 0%, 100% 50%, 0% 100%, 70% 50%);
+    z-index: 2;
+}
+
+#sidebarblur {
+    display: block;
+    background: rgba(24, 24, 24, 0.2);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 4;
+}
+
+.off {
+    z-index: -10 !important;
+}
+
+
+
+/*sidebar content*/
+
+.sidebarbutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 5vh;
+    height: 100%;
+    border-bottom: 2px solid var(--navborder);
+    position: static;
+    font-size: 2vw;
+}
+
+.sidebarbutton:last-of-type {
+    border: none;
+}
+
+.sidebarbutton:not(:first-of-type):hover {
+    background: var(--specialbutton);
+}
+
+.logobox {
+    min-height: 100px;
+    min-width: 100px;
+    padding: 15px;
+}
+
+.sidebarbutton>p {
+    font-size: 2vw;
+    text-align: center;
+    user-select: none;
+    pointer-events: none;
+}
+
+
+.logo {
+    min-height: 80%;
+    width: 80%;
+    text-align: center;
+    background-image: url('cruab\ logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+body.darkmode .logo {
+    filter: invert(100%);
+}
+
+/*main-content*/
+
+main#content-parent {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100vw;
+    background: var(--bodybg);
+    z-index: 1;
+}
+
+#content-parent>div {
+    min-width: 100px;
+    min-height: 100px;
+    max-height: 200px;
+    margin-top: 150px;
+}
+
+article#content {
+    width: 60%;
+    height: auto;
+    /*box-shadow: 1px 4px 14px var(--navborder);*/
+    background: var(--contentbg);
+    padding: 10px 0;
+    margin-bottom: 100px;
+    margin-top: 150px;
+    border-radius: 10px;
+}
+
+#content>div {
+    height: auto;
+    min-height: 200px;
+    padding: 0 10px;
+}
+
+#content-parent>#loginparent {
+    background: var(--contentbg);
+    padding: 2%;
+    border-radius: 10px;
+}
+
+#loginparent #buttonparent {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#submit {
+    width: 5rem;
+    height: 1.5rem;
+    color: white;
+    font-weight: 900;
+    background: #04aa6d;
+    border-radius: 5px;
+    border: none;
+}
+
+#submit:focus {
+    background: #06744b;
+}
+
+#loginparent h3 {
+    margin-block-start: unset;
+}
+
+#loginform {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 10px;
+}
+
+
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    max-width: 100%;
+    height: 100px;
+    border-top: 2px solid;
+}
+
+footer div {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer p {
+    margin: none;
+}
+
+
+/*media queries*/
+
+/*all phones and tablets*/
+@media screen and (max-device-width:700px) and (orientation:portrait) {
+    #topbar {
+        height: 7vh;
+    }
+
+    .topbar-element {
+        min-width: 20vw !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .topbar-element>a:not(.logo) {
+        display: flex;
+        justify-content: unset;
+        text-align: center;
+        margin: auto;
+        width: auto;
+        height: 100%;
+    }
+
+    .dropdown {
+        top: 7vh;
+        right: calc(20vw + 1px);
+        width: 20vw;
+    }
+
+    .dropdown a {
+        text-align: center;
+        height: 25px;
+    }
+
+
+    #sidebar {
+        width: 30vw;
+        height: 100%;
+    }
+
+    .closed {
+        left: calc(-30vw - 5px) !important;
+        box-shadow: none !important;
+    }
+
+    #sidebarholder {
+        height: 100% !important;
+    }
+
+    .sidebarbutton {
+        width: 100%;
+        height: 100% !important;
+    }
+
+    .sidebarbutton:first-of-type {
+        height: 200px !important;
+    }
+
+    .sidebarbutton>p {
+        font-size: 3vw;
+    }
+
+    #sidebartoggle {
+        width: 10vw;
+        height: 10vw;
+        top: calc(50% - 10vw);
+        right: -10vw;
+        z-index: 1;
+    }
+
+    #sidebartoggleimgholder {
+        width: 50px;
+        height: 50px;
+        z-index: 1;
+    }
+
+    #sidebartoggleimgholder:after {
+        width: 50px;
+        height: 50px;
+        z-index: 1;
+    }
+}
